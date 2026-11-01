@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- ============================================================
+   sports-site —— 关于本站页 about.html
+   ------------------------------------------------------------
+   【本页面的作用】
+   介绍这个网站是做什么的、怎么搭建的。
+   对课程作业来说，这页可以顺便说明你满足了哪些要求，
+   老师一眼就能看到你的技术点。
+   ============================================================ -->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="关于绿茵看台：网站定位、技术栈与课程作业要求对照。">
+  <title>关于本站 · 绿茵看台</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230e3a2c' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z'/%3E%3Cpath fill='%23b9e83d' d='M12 7l1.3 2.7 3 .4-2.2 2.1.6 3-2.7-1.5-2.7 1.5.6-3L7.7 10l3-.4z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html" aria-label="绿茵看台 首页">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/>
+          <path fill="currentColor" d="M12 7l1.3 2.7 3 .4-2.2 2.1.6 3-2.7-1.5-2.7 1.5.6-3L7.7 10l3-.4z" opacity=".9"/>
+        </svg>
+        <span>绿茵看台</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false"
+              aria-controls="site-menu" aria-label="打开菜单">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-menu" id="site-menu" aria-label="主导航">
+        <ul class="nav-links">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="matches.html">赛程赛果</a></li>
+          <li><a href="teams.html">球队百科</a></li>
+          <li><a href="stats.html">数据统计</a></li>
+          <li><a href="about.html" aria-current="page">关于本站</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="container">
+
+      <header class="page-header">
+        <h1>关于本站</h1>
+        <p>绿茵看台是一个整理身边足球、篮球赛事信息的静态网站。</p>
+      </header>
+
+      <!-- 网站介绍 -->
+      <section class="section" aria-labelledby="about-title">
+        <h2 class="section-title" id="about-title">这个网站是做什么的</h2>
+        <p>把每周的赛程、赛果和关键数据整理成一个清晰的信息台。比起刷很多条碎片消息，这里更想把一件事讲明白：比分之外，还有球队的风格、数据背后的趋势，和每周值得关注的重点。</p>
+        <p>（把上面这段换成你自己对网站定位的说明。）</p>
+      </section>
+
+      <!-- 技术栈 -->
+      <section class="section" aria-labelledby="tech-title">
+        <h2 class="section-title" id="tech-title">技术栈</h2>
+        <ul>
+          <li><strong>纯 HTML + CSS + JavaScript</strong>：不用任何框架和构建工具，方便理解原理，也方便课上一步步讲清楚。</li>
+          <li><strong>多页面结构</strong>：共 5 个页面，通过顶部导航互相跳转。</li>
+          <li><strong>无后端</strong>：不需要服务器和数据库。收藏功能用浏览器自带的 localStorage 实现。</li>
+          <li><strong>Git 版本管理</strong>：整个学期的开发过程都会用 Git 记录，形成可回溯的提交历史。</li>
+        </ul>
+      </section>
+
+      <!-- 作业要求对照（可给老师看） -->
+      <section class="section" aria-labelledby="req-title">
+        <h2 class="section-title" id="req-title">作业要求对照</h2>
+        <div class="table-wrap">
+          <table>
+            <caption>课程作业要求与本站实现方式</caption>
+            <thead>
+              <tr>
+                <th scope="col">作业要求</th>
+                <th scope="col">本站在哪里实现</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>至少 4 个页面</td><td>首页、赛程赛果、球队百科、数据统计、关于，共 5 页</td></tr>
+              <tr><td>可用的导航</td><td>顶部固定导航，当前页高亮；手机端为汉堡菜单</td></tr>
+              <tr><td>自己的内容</td><td>每个页面都是围绕体育赛事整理的内容（示例数据待替换）</td></tr>
+              <tr><td>语义化、可访问的标记</td><td>header/nav/main/footer 语义标签，跳过链接、aria 属性、键盘焦点</td></tr>
+              <tr><td>响应式布局</td><td>移动优先 CSS，窄屏单列、宽屏多列；汉堡菜单适配手机</td></tr>
+              <tr><td>至少一个交互元素</td><td>赛程按联赛筛选、球队收藏、数据图表切换</td></tr>
+              <tr><td>上线到真实地址</td><td>部署到 GitHub Pages，见《部署说明》</td></tr>
+              <tr><td>Git 历史</td><td>用 Git 记录整个开发过程</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span data-year>2026</span> 绿茵看台 · 课程作业演示站</p>
+      <ul class="footer-nav">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="matches.html">赛程赛果</a></li>
+        <li><a href="teams.html">球队百科</a></li>
+        <li><a href="stats.html">数据统计</a></li>
+        <li><a href="about.html">关于本站</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
