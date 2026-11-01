@@ -1,0 +1,732 @@
+/* ============================================================
+   sports-site —— 全局样式表 style.css
+   ------------------------------------------------------------
+   这个文件被所有页面共用。它负责三件事：
+   1) 视觉设计：配色、字体、间距、卡片
+   2) 响应式布局：让同一套页面在手机、平板、电脑上都能看
+   3) 无障碍：键盘焦点样式、动效开关、对比度
+
+   视觉方向：深绿"球场夜场"主色 + 亮黄绿"边线"强调色，
+   正文区用浅色保证可读性。整体偏"比赛日海报"的活力感。
+   ============================================================ */
+
+/* ---------- 设计变量（Design Tokens）----------
+   把配色、字体、间距集中放在 :root，改一个地方全局生效。
+   这也是"语义化、可维护"的体现。 */
+:root {
+  /* 颜色 */
+  --pitch:        #0e3a2c;   /* 主色·深绿（导航/页脚/大标题背景） */
+  --pitch-light:  #1a5c45;   /* 主色的浅一档（悬停/渐变） */
+  --accent:       #b9e83d;   /* 强调色·亮黄绿（按钮/选中态/关键数据） */
+  --accent-ink:   #25390a;   /* 强调色上放深色文字时的墨色 */
+  --bg:           #f4f7f2;   /* 页面背景·很浅的绿灰 */
+  --surface:      #ffffff;   /* 卡片/内容区背景 */
+  --ink:          #16211c;   /* 正文主文字 */
+  --ink-soft:     #4c5c54;   /* 次要文字 */
+  --line:         #dbe3db;   /* 边框/分隔线 */
+  --focus:        #1a5c45;   /* 键盘焦点高亮 */
+  --danger:       #c0392b;   /* 仅用于"负/平"等数据语义色 */
+
+  /* 字体：用系统字体栈，无需联网加载，任何设备都能显示 */
+  --font-ui: "PingFang SC", "Microsoft YaHei", "Segoe UI",
+             system-ui, -apple-system, sans-serif;
+
+  /* 间距节奏：8px 为基准倍数 */
+  --space-1: 0.5rem;   /* 8px  */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-5: 3rem;     /* 48px */
+
+  /* 圆角与阴影 */
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(14, 58, 44, 0.08);
+
+  /* 内容最大宽度与两侧留白 */
+  --container: 1080px;
+  --gutter: 1.25rem;
+}
+
+/* ---------- 基础重置与语义标签 ----------
+   不同浏览器的默认样式不一样，先统一。
+   这里用 `box-sizing` 让宽高计算更直观。 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* 尊重用户系统"减弱动态效果"的设置 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 所有标题统一去掉默认外边距，用下面的间距类控制 */
+h1, h2, h3, h4, p, ul, ol {
+  margin-top: 0;
+}
+
+a {
+  color: var(--pitch-light);
+}
+
+/* ---------- 无障碍：键盘焦点 ----------
+   让鼠标点击和键盘 Tab 键浏览都能看到清晰焦点，
+   这是 WCAG 无障碍标准的基本要求。 */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* 跳转到主内容的链接（屏幕阅读器/键盘用户专用） */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--pitch);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* 对屏幕阅读器隐藏、但视觉上保留的内容 */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   版心容器与页面骨架
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+main {
+  /* 顶部留白，让内容与导航分开 */
+  padding-block: var(--space-3);
+}
+
+main:focus {
+  outline: none;
+}
+
+/* 每个页面的顶部标题区（共用） */
+.page-header {
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 3px solid var(--pitch);
+}
+.page-header h1 {
+  margin-bottom: 0.25rem;
+  font-size: 1.75rem;
+  color: var(--pitch);
+}
+.page-header p {
+  color: var(--ink-soft);
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   顶部导航（含响应式汉堡菜单）
+   ============================================================ */
+.site-header {
+  background: var(--pitch);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 60px;
+  padding-block: 0.5rem;
+}
+
+/* 站点标志：一个足球图标 + 站名 */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.brand svg {
+  width: 28px;
+  height: 28px;
+  flex: none;
+}
+.brand span {
+  color: var(--accent);
+}
+
+/* 导航链接列表 */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  display: block;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  color: #e8f2ec;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.nav-links a[aria-current="page"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+}
+
+/* 汉堡菜单按钮：默认（窄屏）显示 */
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;   /* 触控热区 ≥ 44px，无障碍要求 */
+  height: 44px;
+  padding: 10px;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+/* 汉堡变叉号 */
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 移动优先：窄屏时导航默认折叠，用汉堡展开 */
+.nav-menu {
+  display: none;
+}
+.nav-menu.open {
+  display: block;
+}
+
+/* ---------- 平板及以上（≥ 768px）：导航常显、去汉堡 ---------- */
+@media (min-width: 768px) {
+  .nav-toggle {
+    display: none;
+  }
+  .nav-menu {
+    display: block;
+  }
+  /* 导航在宽屏时纵向排列到右侧 */
+  .site-header .container {
+    flex-wrap: wrap;
+  }
+}
+
+/* ============================================================
+   通用区块：小节标题、卡片网格、按钮
+   ============================================================ */
+.section {
+  margin-block: var(--space-5);
+}
+.section-title {
+  font-size: 1.3rem;
+  color: var(--pitch);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.section-title::before {
+  content: "";
+  width: 8px;
+  height: 1.25em;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* 卡片网格：窄屏 1 列，平板 2 列，宽屏 3 列 */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* 移动端单列 */
+  gap: var(--space-2);
+}
+@media (min-width: 640px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);   /* 2 列 */
+  }
+}
+@media (min-width: 900px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);   /* 3 列 */
+  }
+}
+
+/* 单张卡片 */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+.card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: var(--pitch);
+}
+.card p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-2);
+  flex: 1;
+}
+.card .card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+.card .tag {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: var(--space-1);
+  align-self: flex-start;
+}
+
+/* 链接式卡片：整张可点，箭头提示 */
+.card-link {
+  margin-top: var(--space-2);
+  font-weight: 600;
+  color: var(--pitch-light);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.card-link:hover {
+  text-decoration: underline;
+}
+
+/* 按钮 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  border: 0;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.1s ease, filter 0.15s ease;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.btn--primary:hover {
+  filter: brightness(1.05);
+}
+.btn--ghost {
+  background: transparent;
+  color: #e8f2ec;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ============================================================
+   Hero（首页大标题区）
+   ============================================================ */
+.hero {
+  background:
+    /* 半透明绿色网格，营造球场草皮氛围 */
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 2px,
+      transparent 2px,
+      transparent 60px
+    ),
+    linear-gradient(160deg, var(--pitch) 0%, var(--pitch-light) 100%);
+  color: #fff;
+  padding-block: var(--space-5);
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.hero h1 {
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  line-height: 1.2;
+  margin-bottom: var(--space-1);
+}
+.hero h1 span {
+  color: var(--accent);
+}
+.hero p {
+  font-size: 1.05rem;
+  color: #d8e6dc;
+  max-width: 34em;
+  margin-bottom: var(--space-3);
+}
+.hero .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+/* Hero 里放一个"焦点赛事"小卡片，衬托设计 */
+.hero-match {
+  margin-top: var(--space-4);
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  max-width: 520px;
+}
+.hero-match .hm-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-weight: 700;
+}
+.hero-match .hm-teams {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+.hero-match .hm-info {
+  color: #d8e6dc;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ============================================================
+   赛程 / 数据页：筛选按钮组 + 表格
+   ============================================================ */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+}
+.filter-bar button {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-bar button:hover {
+  border-color: var(--pitch-light);
+  color: var(--pitch-light);
+}
+.filter-bar button[aria-pressed="true"] {
+  background: var(--pitch);
+  color: #fff;
+  border-color: var(--pitch);
+  font-weight: 700;
+}
+
+/* 表格：移动端横向滚动，宽屏自适应 */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;   /* 列宽显式分配，避免被挤成窄条 */
+  min-width: 560px;      /* 太窄时允许横向滚动 */
+}
+caption {
+  caption-side: top;
+  text-align: left;
+  padding: var(--space-2);
+  font-weight: 700;
+  color: var(--pitch);
+}
+th, td {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+th {
+  background: var(--pitch);
+  color: #fff;
+  font-weight: 600;
+}
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+tbody tr:hover td {
+  background: rgba(14, 58, 44, 0.05);
+}
+/* 状态标记：胜/负/平用不同颜色 */
+.result-w { color: var(--pitch-light); font-weight: 700; }
+.result-l { color: var(--danger); font-weight: 700; }
+.result-d { color: var(--ink-soft); font-weight: 700; }
+
+/* ---------- 赛程列表（matches 页，JS 生成） ---------- */
+.match-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-1);
+}
+.match-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas: "date teams score" "date status score";
+  gap: 0.1rem var(--space-2);
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-2);
+}
+.m-date { grid-area: date; font-size: 0.82rem; color: var(--ink-soft); }
+.m-teams { grid-area: teams; font-weight: 600; }
+.m-score { grid-area: score; font-weight: 800; font-size: 1.15rem; color: var(--pitch); }
+.m-status { grid-area: status; font-size: 0.8rem; color: var(--ink-soft); }
+@media (min-width: 640px) {
+  .match-item {
+    grid-template-columns: 120px 1fr auto auto;
+    grid-template-areas: "date teams score status";
+  }
+}
+
+/* ============================================================
+   球队百科页：球队卡片
+   ============================================================ */
+.team-emblem {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: var(--space-2);
+  background: var(--pitch);
+}
+.card .team-league {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.25rem;
+}
+.card .team-stats {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-bottom: 0;
+}
+
+/* 收藏按钮（球队卡片右上角） */
+.fav-btn {
+  align-self: flex-end;
+  width: 44px;          /* 触控热区 ≥ 44px */
+  height: 44px;
+  margin: -0.75rem -0.75rem 0 0;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.fav-btn .star {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  transition: fill 0.15s ease;
+}
+.fav-btn:hover {
+  color: var(--pitch);
+}
+.fav-btn[aria-pressed="true"] {
+  color: var(--pitch);
+}
+.fav-btn[aria-pressed="true"] .star {
+  fill: var(--accent);
+}
+
+/* ============================================================
+   数据统计页：柱状图
+   ============================================================ */
+.chart {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+.chart-figure {
+  position: relative;
+  height: 260px;
+  margin-block: var(--space-3);
+}
+/* 纯 CSS + JS 生成的可访问柱状图 */
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 100%;
+  padding: 0 6px;
+  border-bottom: 2px solid var(--line);
+}
+.bar {
+  flex: 1;
+  position: relative;
+  background: var(--pitch-light);
+  border-radius: 6px 6px 0 0;
+  min-width: 26px;
+  transition: height 0.4s ease;
+}
+.bar:hover {
+  background: var(--accent);
+}
+.bar .bar-value {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--pitch);
+}
+.bar .bar-label {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* 图表的文字说明区（对屏幕阅读器可见） */
+.chart-note {
+  margin-top: var(--space-4);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+/* 图表下方的"文字版表格"（无障碍替代），更紧凑 */
+.chart-table {
+  min-width: 0;
+  margin-top: var(--space-3);
+  font-size: 0.9rem;
+}
+.chart-table caption {
+  background: var(--pitch);
+  color: #fff;
+}
+.chart-table th, .chart-table td {
+  padding: 0.4rem 0.8rem;
+}
+
+/* ============================================================
+   页脚
+   ============================================================ */
+.site-footer {
+  background: var(--pitch);
+  color: #cfe0d6;
+  margin-top: var(--space-5);
+  padding-block: var(--space-4);
+  font-size: 0.92rem;
+}
+.site-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2);
+  align-items: center;
+}
+.site-footer a {
+  color: var(--accent);
+}
+.site-footer .footer-nav {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+}
