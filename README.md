@@ -1,16 +1,16 @@
-# 绿茵看台 · 体育赛事资讯站
+# Green Stand · Sports News Website
 
-一个用**纯 HTML + CSS + JavaScript** 构建的多页面静态网站，用于课程作业。整理足球、篮球的赛程、赛果与关键数据。
+A multi-page static website built with **plain HTML + CSS + JavaScript**, for a course project. It organises the football and basketball schedules, results and key numbers you follow. **The site content is in English** (the code comments are in Chinese, as learning notes).
 
-## 页面
+## Pages
 
-| 页面 | 文件名 | 内容 |
+| Page | File | Content |
 | --- | --- | --- |
-| 首页 | `index.html` | Hero 大标题 + 最新资讯 + 本周焦点 |
-| 赛程赛果 | `matches.html` | 按联赛筛选的本周赛程（交互元素） |
-| 球队百科 | `teams.html` | 球队介绍 + 收藏球队（交互元素） |
-| 数据统计 | `stats.html` | 切换球队查看得分柱状图（交互元素） |
-| 关于本站 | `about.html` | 网站定位、技术栈、作业要求对照 |
+| Home | `index.html` | Hero + latest news + this week's focus |
+| Matches | `matches.html` | Weekly schedule filterable by league (interactive) |
+| Teams | `teams.html` | Team profiles + save your favourites (interactive) |
+| Stats | `stats.html` | Switch teams to view a score bar chart (interactive) |
+| About | `about.html` | What the site is, tech stack, requirement checklist |
 
 ## 目录结构
 

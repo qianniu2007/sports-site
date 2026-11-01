@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- ============================================================
-   sports-site —— 数据统计页 stats.html
+   sports-site —— Stats page stats.html
    ------------------------------------------------------------
    【本页面的作用】
    用图表展示球队的关键数据（近 5 场进球数等）。
@@ -13,42 +13,42 @@
 
    提示：数据是示例，替换成你自己的真实统计。
    ============================================================ -->
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="球队关键数据可视化，可切换查看不同球队。">
-  <title>数据统计 · 绿茵看台</title>
+  <meta name="description" content="Key team stats visualized — switch between teams to compare.">
+  <title>Stats · Green Stand</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230e3a2c' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z'/%3E%3Cpath fill='%23b9e83d' d='M12 7l1.3 2.7 3 .4-2.2 2.1.6 3-2.7-1.5-2.7 1.5.6-3L7.7 10l3-.4z'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <a class="skip-link" href="#main">跳到主要内容</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- 顶部导航 -->
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="index.html" aria-label="绿茵看台 首页">
+      <a class="brand" href="index.html" aria-label="Green Stand — home">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/>
           <path fill="currentColor" d="M12 7l1.3 2.7 3 .4-2.2 2.1.6 3-2.7-1.5-2.7 1.5.6-3L7.7 10l3-.4z" opacity=".9"/>
         </svg>
-        <span>绿茵看台</span>
+        <span>Green Stand</span>
       </a>
 
       <button class="nav-toggle" type="button" aria-expanded="false"
-              aria-controls="site-menu" aria-label="打开菜单">
+              aria-controls="site-menu" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
 
-      <nav class="nav-menu" id="site-menu" aria-label="主导航">
+      <nav class="nav-menu" id="site-menu" aria-label="Main navigation">
         <ul class="nav-links">
-          <li><a href="index.html">首页</a></li>
-          <li><a href="matches.html">赛程赛果</a></li>
-          <li><a href="teams.html">球队百科</a></li>
-          <li><a href="stats.html" aria-current="page">数据统计</a></li>
-          <li><a href="about.html">关于本站</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="matches.html">Matches</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="stats.html" aria-current="page">Stats</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </nav>
     </div>
@@ -58,38 +58,38 @@
     <div class="container">
 
       <header class="page-header">
-        <h1>数据统计</h1>
-        <p>选择一支球队，查看它近 5 场比赛的进球 / 得分走势。</p>
+        <h1>Stats</h1>
+        <p>Pick a team to see its goals / points across the last five matches.</p>
       </header>
 
       <!-- 球队选择按钮组 -->
-      <div class="filter-bar" id="team-select" role="group" aria-label="选择球队">
-        <button type="button" data-team="城北联队" aria-pressed="true">城北联队</button>
-        <button type="button" data-team="滨江之星" aria-pressed="false">滨江之星</button>
-        <button type="button" data-team="临港鲨鱼" aria-pressed="false">临港鲨鱼</button>
-        <button type="button" data-team="东区闪电" aria-pressed="false">东区闪电</button>
+      <div class="filter-bar" id="team-select" role="group" aria-label="Select a team">
+        <button type="button" data-team="Northside United" aria-pressed="true">Northside United</button>
+        <button type="button" data-team="Riverside Stars" aria-pressed="false">Riverside Stars</button>
+        <button type="button" data-team="Harbor Sharks" aria-pressed="false">Harbor Sharks</button>
+        <button type="button" data-team="Eastside Lightning" aria-pressed="false">Eastside Lightning</button>
       </div>
 
       <!-- 图表区 -->
       <section class="chart" aria-labelledby="chart-title">
-        <h2 class="section-title" id="chart-title">近 5 场得分走势</h2>
+        <h2 class="section-title" id="chart-title">Last 5 matches — score</h2>
 
         <!-- 柱状图容器：柱子的高度由 JS 按数据算出 -->
         <div class="chart-figure" role="img"
-             aria-label="城北联队近5场得分柱状图">
+             aria-label="Northside United last five match scores bar chart">
           <div class="bars" id="bars"></div>
         </div>
 
         <!-- 给屏幕阅读器的数据说明（HTML 表格），并作为图表的文字替代 -->
         <table class="chart-table">
-          <caption>图表数据的文字版（无障碍替代）</caption>
+          <caption>Text version of the chart (accessible alternative)</caption>
           <thead>
-            <tr><th scope="col">场次</th><th scope="col">得分</th></tr>
+            <tr><th scope="col">Match</th><th scope="col">Score</th></tr>
           </thead>
           <tbody id="chart-table-body"></tbody>
         </table>
 
-        <p class="chart-note">数据为示例。柱子越高代表该场得分越多，实际换算：柱子高度 = 得分 ÷ 最高分 × 100%。</p>
+        <p class="chart-note">Sample data. Taller bar = more points that match. Bar height = score ÷ highest score × 100%.</p>
       </section>
 
     </div>
@@ -97,13 +97,13 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>© <span data-year>2026</span> 绿茵看台 · 课程作业演示站</p>
+      <p>© <span data-year>2026</span> Green Stand · Course project demo</p>
       <ul class="footer-nav">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="matches.html">赛程赛果</a></li>
-        <li><a href="teams.html">球队百科</a></li>
-        <li><a href="stats.html">数据统计</a></li>
-        <li><a href="about.html">关于本站</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="matches.html">Matches</a></li>
+        <li><a href="teams.html">Teams</a></li>
+        <li><a href="stats.html">Stats</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
     </div>
   </footer>

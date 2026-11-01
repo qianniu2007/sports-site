@@ -17,12 +17,12 @@
 
 // 赛程数据（示例，请替换为你自己的真实赛程）
 var MATCHES = [
-  { league: "football",   date: "11-02 周六", teams: "城北联队 vs 滨江之星", score: "2–1", status: "已完赛" },
-  { league: "football",   date: "11-02 周六", teams: "河西雄鹰 vs 东山勇士", score: "–",   status: "未开始" },
-  { league: "football",   date: "11-03 周日", teams: "南山风暴 vs 港口竞技", score: "0–0", status: "已完赛" },
-  { league: "basketball", date: "11-02 周六", teams: "临港鲨鱼 vs 湖畔飞人", score: "88–92", status: "已完赛" },
-  { league: "basketball", date: "11-03 周日", teams: "东区闪电 vs 南城野马", score: "–",   status: "未开始" },
-  { league: "football",   date: "11-04 周一", teams: "北郊联 vs 云岭FC",    score: "1–3", status: "已完赛" }
+  { league: "football",   date: "Sat 11-02", teams: "Northside United vs Riverside Stars", score: "2–1", status: "Finished" },
+  { league: "football",   date: "Sat 11-02", teams: "Westbank Eagles vs East Ridge Warriors", score: "–",   status: "Upcoming" },
+  { league: "football",   date: "Sun 11-03", teams: "South Hill Storm vs Harbor Athletic",   score: "0–0", status: "Finished" },
+  { league: "basketball", date: "Sat 11-02", teams: "Harbor Sharks vs Lakeside Flyers",      score: "88–92", status: "Finished" },
+  { league: "basketball", date: "Sun 11-03", teams: "Eastside Lightning vs South City Mustangs", score: "–", status: "Upcoming" },
+  { league: "football",   date: "Mon 11-04", teams: "North District FC vs Cloud Ridge FC",   score: "1–3", status: "Finished" }
 ];
 
 // 当前选中的联赛："all" / "football" / "basketball"
@@ -52,7 +52,7 @@ function renderMatches() {
   if (list.length === 0) {
     // 空状态：给用户一个友好的提示
     var empty = document.createElement("p");
-    empty.textContent = "这个分类暂时没有场次。";
+    empty.textContent = "No matches in this category yet.";
     container.appendChild(empty);
     return;
   }

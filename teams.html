@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <!-- ============================================================
-   sports-site —— 球队百科页 teams.html
+   sports-site —— Teams page teams.html
    ------------------------------------------------------------
    【本页面的作用】
    用卡片展示各支球队的基本信息（所属联赛、主场、风格）。
 
    【交互元素 2：收藏球队】
-   每张卡右上角有个"☆ / ★"收藏按钮。
+   每张卡右上角有个收藏按钮。
    点一下收藏，再点取消收藏。选择会存进浏览器 localStorage，
    所以刷新页面 / 下次再打开，收藏依然在。
 
    提示：球队信息是示例，替换成你熟悉或感兴趣的真实球队。
    ============================================================ -->
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="足球与篮球球队百科，可收藏你喜欢的球队。">
-  <title>球队百科 · 绿茵看台</title>
+  <meta name="description" content="Football and basketball team profiles — save the teams you like.">
+  <title>Teams · Green Stand</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230e3a2c' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z'/%3E%3Cpath fill='%23b9e83d' d='M12 7l1.3 2.7 3 .4-2.2 2.1.6 3-2.7-1.5-2.7 1.5.6-3L7.7 10l3-.4z'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <a class="skip-link" href="#main">跳到主要内容</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- 顶部导航 -->
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="index.html" aria-label="绿茵看台 首页">
+      <a class="brand" href="index.html" aria-label="Green Stand — home">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/>
           <path fill="currentColor" d="M12 7l1.3 2.7 3 .4-2.2 2.1.6 3-2.7-1.5-2.7 1.5.6-3L7.7 10l3-.4z" opacity=".9"/>
         </svg>
-        <span>绿茵看台</span>
+        <span>Green Stand</span>
       </a>
 
       <button class="nav-toggle" type="button" aria-expanded="false"
-              aria-controls="site-menu" aria-label="打开菜单">
+              aria-controls="site-menu" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
 
-      <nav class="nav-menu" id="site-menu" aria-label="主导航">
+      <nav class="nav-menu" id="site-menu" aria-label="Main navigation">
         <ul class="nav-links">
-          <li><a href="index.html">首页</a></li>
-          <li><a href="matches.html">赛程赛果</a></li>
-          <li><a href="teams.html" aria-current="page">球队百科</a></li>
-          <li><a href="stats.html">数据统计</a></li>
-          <li><a href="about.html">关于本站</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="matches.html">Matches</a></li>
+          <li><a href="teams.html" aria-current="page">Teams</a></li>
+          <li><a href="stats.html">Stats</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </nav>
     </div>
@@ -57,96 +57,96 @@
     <div class="container">
 
       <header class="page-header">
-        <h1>球队百科</h1>
-        <p>认识几支活跃在本地联赛的球队。点卡片右上角的星星收藏你喜欢的球队。</p>
+        <h1>Teams</h1>
+        <p>Meet the clubs that light up the local leagues. Tap the star on any card to save your favourites.</p>
       </header>
 
       <!-- 球队卡片网格（示例内容） -->
       <div class="card-grid" id="team-grid">
 
         <!-- 每张卡：data-name 是收藏时用的唯一标识 -->
-        <article class="card" data-name="城北联队">
+        <article class="card" data-name="Northside United">
           <button class="fav-btn" type="button" aria-pressed="false"
-                  aria-label="收藏 城北联队">
+                  aria-label="Save Northside United">
             <svg class="star" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M12 3.5l2.6 5.4 5.9.9-4.3 4.1 1 5.9L12 17l-5.2 2.8 1-5.9-4.3-4.1 5.9-.9z"/>
             </svg>
           </button>
-          <div class="team-emblem" aria-hidden="true">城</div>
-          <p class="team-league">足球 · 城市超级联赛</p>
-          <h3>城北联队</h3>
-          <p>主场设在城北体育场，以年轻阵容和积极的逼抢风格著称。</p>
-          <p class="team-stats">主场：城北体育场 · 昵称：青年军</p>
+          <div class="team-emblem" aria-hidden="true">N</div>
+          <p class="team-league">Football · City Super League</p>
+          <h3>Northside United</h3>
+          <p>A young squad known for an aggressive, high-pressing style at their home ground in the north of the city.</p>
+          <p class="team-stats">Home: Northside Stadium · Nickname: The Young Guns</p>
         </article>
 
-        <article class="card" data-name="滨江之星">
+        <article class="card" data-name="Riverside Stars">
           <button class="fav-btn" type="button" aria-pressed="false"
-                  aria-label="收藏 滨江之星">
+                  aria-label="Save Riverside Stars">
             <svg class="star" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M12 3.5l2.6 5.4 5.9.9-4.3 4.1 1 5.9L12 17l-5.2 2.8 1-5.9-4.3-4.1 5.9-.9z"/>
             </svg>
           </button>
-          <div class="team-emblem" aria-hidden="true">滨</div>
-          <p class="team-league">足球 · 城市超级联赛</p>
-          <h3>滨江之星</h3>
-          <p>经验老到的劲旅，擅长掌控节奏，主场氛围火爆。</p>
-          <p class="team-stats">主场：滨江大球场 · 昵称：星队</p>
+          <div class="team-emblem" aria-hidden="true">R</div>
+          <p class="team-league">Football · City Super League</p>
+          <h3>Riverside Stars</h3>
+          <p>An experienced side that controls the tempo of matches, backed by one of the loudest home crowds.</p>
+          <p class="team-stats">Home: Riverside Arena · Nickname: The Stars</p>
         </article>
 
-        <article class="card" data-name="临港鲨鱼">
+        <article class="card" data-name="Harbor Sharks">
           <button class="fav-btn" type="button" aria-pressed="false"
-                  aria-label="收藏 临港鲨鱼">
+                  aria-label="Save Harbor Sharks">
             <svg class="star" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M12 3.5l2.6 5.4 5.9.9-4.3 4.1 1 5.9L12 17l-5.2 2.8 1-5.9-4.3-4.1 5.9-.9z"/>
             </svg>
           </button>
-          <div class="team-emblem" aria-hidden="true">鲨</div>
-          <p class="team-league">篮球 · 都市篮球联赛</p>
-          <h3>临港鲨鱼</h3>
-          <p>攻防转换极快，三分命中率联赛前列，冲击力十足。</p>
-          <p class="team-stats">主场：临港体育馆 · 昵称：鲨群</p>
+          <div class="team-emblem" aria-hidden="true">H</div>
+          <p class="team-league">Basketball · Metro Basketball League</p>
+          <h3>Harbor Sharks</h3>
+          <p>Blistering in transition with one of the league's best three-point rates — pure attacking energy.</p>
+          <p class="team-stats">Home: Harbor Pavilion · Nickname: The Sharks</p>
         </article>
 
-        <article class="card" data-name="东区闪电">
+        <article class="card" data-name="Eastside Lightning">
           <button class="fav-btn" type="button" aria-pressed="false"
-                  aria-label="收藏 东区闪电">
+                  aria-label="Save Eastside Lightning">
             <svg class="star" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M12 3.5l2.6 5.4 5.9.9-4.3 4.1 1 5.9L12 17l-5.2 2.8 1-5.9-4.3-4.1 5.9-.9z"/>
             </svg>
           </button>
-          <div class="team-emblem" aria-hidden="true">闪</div>
-          <p class="team-league">篮球 · 都市篮球联赛</p>
-          <h3>东区闪电</h3>
-          <p>防守为本的球队，节奏偏慢但韧性十足，主场胜率高。</p>
-          <p class="team-stats">主场：东区中心馆 · 昵称：铁防</p>
+          <div class="team-emblem" aria-hidden="true">E</div>
+          <p class="team-league">Basketball · Metro Basketball League</p>
+          <h3>Eastside Lightning</h3>
+          <p>A defense-first club that plays a slower, grinding game with a strong home record.</p>
+          <p class="team-stats">Home: Eastside Center · Nickname: The Wall</p>
         </article>
 
-        <article class="card" data-name="南山风暴">
+        <article class="card" data-name="South Hill Storm">
           <button class="fav-btn" type="button" aria-pressed="false"
-                  aria-label="收藏 南山风暴">
+                  aria-label="Save South Hill Storm">
             <svg class="star" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M12 3.5l2.6 5.4 5.9.9-4.3 4.1 1 5.9L12 17l-5.2 2.8 1-5.9-4.3-4.1 5.9-.9z"/>
             </svg>
           </button>
-          <div class="team-emblem" aria-hidden="true">风</div>
-          <p class="team-league">足球 · 城市超级联赛</p>
-          <h3>南山风暴</h3>
-          <p>中游常客，客场作战能力出色，常爆冷逼平强队。</p>
-          <p class="team-stats">主场：南山竞技场 · 昵称：搅局者</p>
+          <div class="team-emblem" aria-hidden="true">S</div>
+          <p class="team-league">Football · City Super League</p>
+          <h3>South Hill Storm</h3>
+          <p>A mid-table mainstay that travels well and regularly shocks the bigger sides with a draw.</p>
+          <p class="team-stats">Home: South Hill Ground · Nickname: The Spoilers</p>
         </article>
 
-        <article class="card" data-name="湖畔飞人">
+        <article class="card" data-name="Lakeside Flyers">
           <button class="fav-btn" type="button" aria-pressed="false"
-                  aria-label="收藏 湖畔飞人">
+                  aria-label="Save Lakeside Flyers">
             <svg class="star" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M12 3.5l2.6 5.4 5.9.9-4.3 4.1 1 5.9L12 17l-5.2 2.8 1-5.9-4.3-4.1 5.9-.9z"/>
             </svg>
           </button>
-          <div class="team-emblem" aria-hidden="true">飞</div>
-          <p class="team-league">篮球 · 都市篮球联赛</p>
-          <h3>湖畔飞人</h3>
-          <p>年轻新锐，观赏性极强，场均快攻得分联赛第一。</p>
-          <p class="team-stats">主场：湖畔馆 · 昵称：飞人军团</p>
+          <div class="team-emblem" aria-hidden="true">L</div>
+          <p class="team-league">Basketball · Metro Basketball League</p>
+          <h3>Lakeside Flyers</h3>
+          <p>A young, exciting team that leads the league in fast-break points per game.</p>
+          <p class="team-stats">Home: Lakeside Hall · Nickname: The Flyers</p>
         </article>
 
       </div>
@@ -156,13 +156,13 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>© <span data-year>2026</span> 绿茵看台 · 课程作业演示站</p>
+      <p>© <span data-year>2026</span> Green Stand · Course project demo</p>
       <ul class="footer-nav">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="matches.html">赛程赛果</a></li>
-        <li><a href="teams.html">球队百科</a></li>
-        <li><a href="stats.html">数据统计</a></li>
-        <li><a href="about.html">关于本站</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="matches.html">Matches</a></li>
+        <li><a href="teams.html">Teams</a></li>
+        <li><a href="stats.html">Stats</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
     </div>
   </footer>

@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <!-- ============================================================
-   sports-site —— 赛程赛果页 matches.html
+   sports-site —— Matches page matches.html
    ------------------------------------------------------------
    【本页面的作用】
    按联赛分类展示本周的赛程和赛果。
 
    【交互元素（作业要求的"至少一个交互元素"在这里落地）】
-   顶部是一组筛选按钮（足球 / 篮球 / 全部），
+   顶部是一组筛选按钮（Football / Basketball / All），
    点击后只显示对应联赛的场次。数据在 js/matches.js 里，
    用 JavaScript 根据按钮状态动态渲染 / 过滤。
 
    提示：下面的场次都是"示例数据"，用注释标好怎么换成你自己的。
    ============================================================ -->
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="本周足球与篮球赛程赛果，可按联赛筛选。">
-  <title>赛程赛果 · 绿茵看台</title>
+  <meta name="description" content="This week's football and basketball schedule and results, filterable by league.">
+  <title>Matches · Green Stand</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230e3a2c' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z'/%3E%3Cpath fill='%23b9e83d' d='M12 7l1.3 2.7 3 .4-2.2 2.1.6 3-2.7-1.5-2.7 1.5.6-3L7.7 10l3-.4z'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <a class="skip-link" href="#main">跳到主要内容</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- 顶部导航（与首页一致） -->
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="index.html" aria-label="绿茵看台 首页">
+      <a class="brand" href="index.html" aria-label="Green Stand — home">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/>
           <path fill="currentColor" d="M12 7l1.3 2.7 3 .4-2.2 2.1.6 3-2.7-1.5-2.7 1.5.6-3L7.7 10l3-.4z" opacity=".9"/>
         </svg>
-        <span>绿茵看台</span>
+        <span>Green Stand</span>
       </a>
 
       <button class="nav-toggle" type="button" aria-expanded="false"
-              aria-controls="site-menu" aria-label="打开菜单">
+              aria-controls="site-menu" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
 
-      <nav class="nav-menu" id="site-menu" aria-label="主导航">
+      <nav class="nav-menu" id="site-menu" aria-label="Main navigation">
         <ul class="nav-links">
-          <li><a href="index.html">首页</a></li>
-          <li><a href="matches.html" aria-current="page">赛程赛果</a></li>
-          <li><a href="teams.html">球队百科</a></li>
-          <li><a href="stats.html">数据统计</a></li>
-          <li><a href="about.html">关于本站</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="matches.html" aria-current="page">Matches</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="stats.html">Stats</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </nav>
     </div>
@@ -58,38 +58,38 @@
 
       <!-- 页面标题 -->
       <header class="page-header">
-        <h1>赛程赛果</h1>
-        <p>本周的足球与篮球场次，点击下面的联赛按钮可以筛选。</p>
+        <h1>Matches &amp; Results</h1>
+        <p>This week's football and basketball fixtures. Use the buttons below to filter by league.</p>
       </header>
 
       <!-- 筛选按钮组 -->
       <!-- aria-pressed 表示"这个按钮当前是否被按下"，是筛选控件的标准无障碍写法 -->
-      <div class="filter-bar" role="group" aria-label="按联赛筛选">
-        <button type="button" data-filter="all" aria-pressed="true">全部</button>
-        <button type="button" data-filter="football" aria-pressed="false">足球</button>
-        <button type="button" data-filter="basketball" aria-pressed="false">篮球</button>
+      <div class="filter-bar" role="group" aria-label="Filter by league">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="football" aria-pressed="false">Football</button>
+        <button type="button" data-filter="basketball" aria-pressed="false">Basketball</button>
       </div>
 
       <!-- 赛程列表：内容由 js/matches.js 动态生成
            aria-live 让屏幕阅读器在内容更新时能读到变化 -->
-      <section class="match-list" id="match-list" aria-live="polite" aria-label="本周赛程列表">
+      <section class="match-list" id="match-list" aria-live="polite" aria-label="This week's match list">
         <!-- 这里会被 JavaScript 填充 -->
       </section>
 
-      <p class="chart-note">说明：本页场次为示例数据，用于演示筛选交互。替换你自己的真实赛程时，请编辑 <code>js/matches.js</code> 里的数据。</p>
+      <p class="chart-note">Note: the fixtures on this page are sample data for demonstrating the filter. To use your own schedule, edit the data in <code>js/matches.js</code>.</p>
 
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© <span data-year>2026</span> 绿茵看台 · 课程作业演示站</p>
+      <p>© <span data-year>2026</span> Green Stand · Course project demo</p>
       <ul class="footer-nav">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="matches.html">赛程赛果</a></li>
-        <li><a href="teams.html">球队百科</a></li>
-        <li><a href="stats.html">数据统计</a></li>
-        <li><a href="about.html">关于本站</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="matches.html">Matches</a></li>
+        <li><a href="teams.html">Teams</a></li>
+        <li><a href="stats.html">Stats</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
     </div>
   </footer>

@@ -13,14 +13,14 @@
 
 // 各队近 5 场得分（示例数据，请替换成你自己的）
 var TEAMS_STATS = {
-  "城北联队": [2, 1, 3, 0, 2],
-  "滨江之星": [1, 2, 2, 3, 1],
-  "临港鲨鱼": [88, 95, 80, 102, 91],
-  "东区闪电": [76, 82, 85, 79, 88]
+  "Northside United": [2, 1, 3, 0, 2],
+  "Riverside Stars":  [1, 2, 2, 3, 1],
+  "Harbor Sharks":    [88, 95, 80, 102, 91],
+  "Eastside Lightning": [76, 82, 85, 79, 88]
 };
 
 // 当前选中的球队
-var currentTeam = "城北联队";
+var currentTeam = "Northside United";
 
 document.addEventListener("DOMContentLoaded", function () {
   renderChart();
@@ -59,7 +59,7 @@ function renderChart() {
     // 柱底显示场次
     var label = document.createElement("span");
     label.className = "bar-label";
-    label.textContent = "第" + (index + 1) + "场";
+    label.textContent = "Match " + (index + 1);
     bar.appendChild(label);
 
     barsEl.appendChild(bar);
@@ -70,7 +70,7 @@ function renderChart() {
   data.forEach(function (value, index) {
     var tr = document.createElement("tr");
     var td1 = document.createElement("td");
-    td1.textContent = "第" + (index + 1) + "场";
+    td1.textContent = "Match " + (index + 1);
     var td2 = document.createElement("td");
     td2.textContent = value;
     tr.appendChild(td1);
@@ -81,7 +81,7 @@ function renderChart() {
   // 更新图表的 aria-label，告诉屏幕阅读器当前是哪个队
   var figure = document.querySelector(".chart-figure");
   if (figure) {
-    figure.setAttribute("aria-label", currentTeam + " 近5场得分柱状图");
+    figure.setAttribute("aria-label", currentTeam + " last five match scores bar chart");
   }
 }
 
